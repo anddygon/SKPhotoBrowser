@@ -63,7 +63,7 @@ extension FromLocalViewController {
             return
         }
         
-//        SKPhotoBrowserOptions.displayToolbar = false
+        SKPhotoBrowserOptions.displayToolbarStyle = .Classes
         
         let browser = SKPhotoBrowser(originImage: originImage, photos: images, animatedFromView: cell)
         browser.initializePageIndex(indexPath.row)

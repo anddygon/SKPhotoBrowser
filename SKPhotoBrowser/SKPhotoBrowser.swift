@@ -17,7 +17,7 @@ public class SKPhotoBrowser: UIViewController {
     
     private var closeButton: SKCloseButton!
     private var deleteButton: SKDeleteButton!
-    private var toolbar: SKToolbar!
+    private var toolbar: SKBaseToolbar!
     
     // actions
     private var activityViewController: UIActivityViewController!
@@ -343,6 +343,7 @@ public extension SKPhotoBrowser {
         if UI_USER_INTERFACE_IDIOM() == .Phone {
             presentViewController(activityViewController, animated: true, completion: nil)
         } else {
+            guard let toolbar = toolbar as? SKToolbar else { return }
             activityViewController.modalPresentationStyle = .Popover
             let popover: UIPopoverPresentationController! = activityViewController.popoverPresentationController
             popover.barButtonItem = toolbar.toolActionButton
@@ -503,7 +504,7 @@ internal extension SKPhotoBrowser {
             } else {
                 actionSheetController.modalPresentationStyle = .Popover
                 
-                if let popoverController = actionSheetController.popoverPresentationController {
+                if let popoverController = actionSheetController.popoverPresentationController,toolbar = toolbar as? SKToolbar {
                     popoverController.sourceView = self.view
                     popoverController.barButtonItem = toolbar.toolActionButton
                 }
@@ -556,7 +557,12 @@ private extension SKPhotoBrowser {
     }
     
     func configureToolbar() {
-        toolbar = SKToolbar(frame: frameForToolbarAtOrientation(), browser: self)
+        switch SKPhotoBrowserOptions.displayToolbarStyle {
+        case .Text:
+            toolbar = SKToolbar(frame: frameForToolbarAtOrientation(), browser: self)
+        case .Classes:
+            toolbar = SKTextToolbar(frame: frameForToolbarAtOrientation(), browser: self)
+        }
         view.addSubview(toolbar)
     }
     

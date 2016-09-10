@@ -15,10 +15,8 @@ class SKButton: UIButton {
     var showFrame: CGRect!
     var hideFrame: CGRect!
     var insets: UIEdgeInsets {
-
-
         return UI_USER_INTERFACE_IDIOM() == .Phone
-            ?  UIEdgeInsets(top: 15.25, left: 15.25, bottom: 15.25, right: 15.25) : UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            ?  UIEdgeInsetsMake(15.25, 15.25, 15.25, 15.25) : UIEdgeInsetsMake(12, 12, 12, 12)
     }
     var size: CGSize = CGSize(width: 44, height: 44)
     var margin: CGFloat = 5
@@ -28,7 +26,7 @@ class SKButton: UIButton {
     func setup(imageName: String) {
         backgroundColor = .clearColor()
         imageEdgeInsets = insets
-//        clipsToBounds = true
+        //        clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = true
         autoresizingMask = [.FlexibleBottomMargin, .FlexibleLeftMargin, .FlexibleRightMargin, .FlexibleTopMargin]
         
@@ -36,9 +34,9 @@ class SKButton: UIButton {
                             inBundle: bundle, compatibleWithTraitCollection: nil) ?? UIImage()
         setImage(image, forState: .Normal)
     }
-  
+    
     func updateFrame() { }
-  
+    
     func setFrameSize(size: CGSize) {
         let newRect = CGRect(x: margin, y: buttonTopOffset, width: size.width, height: size.height)
         self.frame = newRect
@@ -56,8 +54,8 @@ class SKCloseButton: SKButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup(imageName)
-        showFrame = CGRect(x: margin, y: buttonTopOffset, width: size.width, height: size.height)
-        hideFrame = CGRect(x: margin, y: -20, width: size.width, height: size.height)
+        showFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: buttonTopOffset, width: size.width, height: size.height)
+        hideFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: -20, width: size.width, height: size.height)
     }
     
     override func updateFrame() {
@@ -73,13 +71,13 @@ class SKDeleteButton: SKButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup(imageName)
-        showFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: buttonTopOffset, width: size.width, height: size.height)
-        hideFrame = CGRect(x: SKMesurement.screenWidth - size.width, y: -20, width: size.width, height: size.height)
+        showFrame = CGRect(x: margin, y: buttonTopOffset, width: size.width, height: size.height)
+        hideFrame = CGRect(x: margin, y: -20, width: size.width, height: size.height)
     }
     
     override func updateFrame() {
     }
-  
+    
     override func setFrameSize(size: CGSize) {
         let newRect = CGRect(x: SKMesurement.screenWidth - size.width, y: buttonTopOffset, width: size.width, height: size.height)
         self.frame = newRect

@@ -11,7 +11,7 @@ import Foundation
 // helpers which often used
 private let bundle = NSBundle(forClass: SKPhotoBrowser.self)
 
-class SKToolbar: UIToolbar {
+class SKToolbar: SKBaseToolbar {
     var toolCounterLabel: UILabel!
     var toolCounterButton: UIBarButtonItem!
     var toolPreviousButton: UIBarButtonItem!
@@ -40,7 +40,7 @@ class SKToolbar: UIToolbar {
         setupToolbar()
     }
     
-    func updateToolbar(currentPageIndex: Int) {
+    override func updateToolbar(currentPageIndex: Int) {
         guard let browser = browser else { return }
         
         if browser.numberOfPhotos > 1 {
