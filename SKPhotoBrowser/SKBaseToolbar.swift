@@ -10,7 +10,7 @@ import UIKit
 
 class SKBaseToolbar: UIToolbar{
 
-    func updateToolbar(currentPageIndex: Int) {
+    func updateToolbar(_ currentPageIndex: Int) {
         
     }
     

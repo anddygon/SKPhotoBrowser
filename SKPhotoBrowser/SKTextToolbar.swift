@@ -9,13 +9,13 @@
 import Foundation
 
 // helpers which often used
-private let bundle = NSBundle(forClass: SKPhotoBrowser.self)
+private let bundle = Bundle(for: SKPhotoBrowser.self)
 
 class SKTextToolbar: SKBaseToolbar {
     var toolPageControl: UIPageControl!
     var toolCounterButton: UIBarButtonItem!
     
-    private weak var browser: SKPhotoBrowser?
+    fileprivate weak var browser: SKPhotoBrowser?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -34,7 +34,7 @@ class SKTextToolbar: SKBaseToolbar {
         setupToolbar()
     }
     
-    override func updateToolbar(currentPageIndex: Int) {
+    override func updateToolbar(_ currentPageIndex: Int) {
         guard let _ = browser else { return }
         toolPageControl.currentPage = currentPageIndex
         
@@ -51,21 +51,21 @@ class SKTextToolbar: SKBaseToolbar {
 
 private extension SKTextToolbar {
     func setupApperance() {
-        backgroundColor = .clearColor()
+        backgroundColor = .clear
         clipsToBounds = true
-        translucent = true
-        setBackgroundImage(UIImage(), forToolbarPosition: .Any, barMetrics: .Default)
+        isTranslucent = true
+        setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
         
         // toolbar
         if !SKPhotoBrowserOptions.displayToolbar {
-            hidden = true
+            isHidden = true
         }
     }
     
     func setupToolbar() {
         guard let _ = browser else { return }
         
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         var items = [UIBarButtonItem]()
         items.append(flexSpace)
         

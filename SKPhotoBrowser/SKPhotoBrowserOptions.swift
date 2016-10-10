@@ -9,7 +9,7 @@
 import Foundation
 
 public enum SKToolbarStyle {
-    case Text,Classes
+    case text,classes
 }
 
 public struct SKPhotoBrowserOptions {
@@ -18,7 +18,7 @@ public struct SKPhotoBrowserOptions {
     public static var actionButtonTitles: [String]?
     
     public static var displayToolbar: Bool = true
-    public static var displayToolbarStyle: SKToolbarStyle = .Text
+    public static var displayToolbarStyle: SKToolbarStyle = .text
     public static var displayCounterLabel: Bool = true
     public static var displayBackAndForwardButton: Bool = true
     public static var disableVerticalSwipe: Bool = false
