@@ -298,6 +298,8 @@ public extension SKPhotoBrowser {
     }
     
     func hideControlsAfterDelay() {
+        // 修复一个bug在没有此行会引发某些情况下scrollView不能滚了
+        guard controlVisibilityTimer == nil  else { return }
         // reset
         cancelControlHiding()
         // start
